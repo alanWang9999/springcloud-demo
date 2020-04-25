@@ -1,0 +1,11 @@
+rootProject.name = 'ly-springcloud-demo'
+include 'register-center'
+include 'project-stock'
+include 'project-order'
+include 'project-commons'
+include 'product-service'
+include 'sale-service'
+include 'zikpin-server'
+include 'project-gateway'
+include 'user-service'
+

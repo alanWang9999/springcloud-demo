@@ -1,0 +1,43 @@
+server:
+  port: 8987
+spring:
+  application:
+    name: sale-service
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/InvoicingSystem
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  zipkin:
+    base-url: http://localhost:10001
+  sleuth:
+    sampler:
+      percentage: 1.0    #0.1--1.0  链路跟踪的数据上传的概率是多大
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+eureka:
+  instance:
+    prefer-ip-address: true #表示注册时，使用ip注册，而不是使用主机名称
+  client:
+    service-url:
+      defaultZone: http://localhost:8889/eureka
+logging:
+  level:
+    com.ly.sale.service.controller: debug
+#熔断机制：源方法在一定时间内调用失败多次，此时会触发熔断机制，源方法在一定时间内，不会执行，
+#而是直接执行回路方法。当经过一段时间后，熔断器会变成半开状态，此时，再有请求，会调用源方法，
+#如果源方法调用成功，则熔断关闭，如果源方法调用失败，则熔断状态变成全开
+#熔断状态：关闭(源方法先执行，如果源方法执行失败或超时，会执行回路方法)
+#        全开(源方法不执行，直接执行回路方法
+#        半开(会先执行源方法，执行失败或超时，立即切换成全开状态，反之，切换成关闭状态)
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 20 #前提条件，一定时间内发起一定数量的请求。 也就是5秒钟内(这个5秒对应下面的滚动窗口长度)至少请求20次，熔断器才发挥起作用。 默认20
+        errorThresholdPercentage: 50 #错误百分比。达到或超过这个百分比，熔断器打开。 比如：5秒内有4个请求，2个请求超时或者失败，就会自动开启熔断
+        sleepWindowInMilliseconds: 5000 #5秒后，进入半打开状态（熔断开启，间隔一段时间后，会让一部分的命令去请求服务提供者，如果结果依旧是失败，则又会进入熔断状态，如果成功，就关闭熔断）。 默认5秒
+    metrics:
+      rollingStats:
+        timeInMilliseconds: 5000 #5秒为一次统计周期，术语描述：滚动窗口的长度为5秒

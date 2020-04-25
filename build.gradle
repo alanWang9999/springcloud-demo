@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        maven { url = "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+        mavenCentral()
+    }
+    dependencies {
+        //springboot的打包插件
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+//allproject:allproject内的配置项，会影响所有的项目，包括父项目本身
+allprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    group = 'com.ly'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '1.8'
+
+    repositories {
+        maven { url = "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+        mavenCentral()
+    }
+
+    ext {
+        springCloudVersion = 'Edgware.SR2'
+    }
+}
+//subproject:subproject内的配置项，会影响所有的子模块，不包括root本身
+subprojects {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        compile("net.sourceforge.nekohtml:nekohtml:1.9.22")
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly('org.projectlombok:lombok:1.18.4')
+    }
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
+

@@ -1,0 +1,16 @@
+server:
+  port: 8889
+spring:
+  application:
+    name: register-center #服务的名字
+eureka:
+  client:
+    register-with-eureka: false #false时，表示单机模式（非集群），如果为true表示会向其他注册中心进行注册
+    fetch-registry: false #拉取注册信息
+    service-url:
+      defaultZone: http://localhost:8889/eureka/
+  server:
+    enable-self-preservation: false #是否开启eureka服务器的自我保护
+
+# 在一台电脑上一个项目通过修改端口号，启动多个进程，这种部署集群的方式
+# 叫做伪集群
