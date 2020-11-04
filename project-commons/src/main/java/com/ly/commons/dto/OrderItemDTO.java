@@ -7,15 +7,19 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * @ClassName QuerySale
+ * @ClassName OrderItemDTO
  * @Author alan.wang   QQ:3103484396
- * @Description TODO
+ * @Description 订单项
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class QuerySale
+public class OrderItemDTO
 {
-    private Integer id;
+    /* 商品名称 */
+    private String goodsName;
+    /* 购买的单价 */
     private BigDecimal price;
+    /* 购买的数量 */
+    private BigDecimal qty;
 }

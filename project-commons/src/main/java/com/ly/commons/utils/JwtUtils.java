@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ly.commons.consts.Consts;
 import com.ly.commons.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,11 @@ public class JwtUtils
     }
 
     public static void main(String[] args) {
+
         String str = "eyJpc3MiOiJhdXRoMCIsImV4cCI6MTU4Njc0NDkxOCwiaWF0IjoxNTg2NzQ0OTE2LCJ1c2VyIjoie2lkOjEsbmFtZTpcImJkcW5cIn0ifQ";
+        DecodedJWT decodedJWT = JWT.decode(str);
+        decodedJWT.getClaim("user");
+
         String playload = new String(Base64.getDecoder().decode(str));
         Map map = (Map) JSON.parse(playload);
         System.out.println(map);

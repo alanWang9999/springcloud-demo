@@ -2,7 +2,11 @@ package com.ly.sale.service.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.ToString;
+import org.apache.ibatis.annotations.CacheNamespace;
+import org.apache.ibatis.cache.decorators.LruCache;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,7 +15,8 @@ import java.util.Date;
  * @Author alan.wang   QQ:3103484396
  * @Description 销售的实体类
  */
-public class Sale
+@ToString
+public class Sale implements Serializable
 {
     @TableId(type = IdType.AUTO)
     private Integer id;//销售单号

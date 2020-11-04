@@ -1,4 +1,0 @@
-dependencies {
-    //eureka:注册中心,服务器 、nacos(阿里)
-    compile 'org.springframework.cloud:spring-cloud-starter-eureka-server'
-}
