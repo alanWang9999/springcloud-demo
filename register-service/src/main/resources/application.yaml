@@ -1,11 +1,11 @@
 server:
-  port: 9000
+  port: 9002
 eureka:
   client:
     register-with-eureka: false #false时，表示表示单机模式（非集群），如果为true表示会向其他注册中心进行注册
     fetch-registry: true #拉取注册信息
     service-url:
-      defaultZone: http://localhost:8888/eureka/
+      defaultZone: http://localhost:9001/eureka/
 spring:
   application:
     name: register-service
