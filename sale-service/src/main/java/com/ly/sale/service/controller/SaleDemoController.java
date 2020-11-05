@@ -18,7 +18,7 @@ public class SaleDemoController {
     @ResponseBody
     @RequestMapping("/testRemoteStock")
     public String testRemoteStock(){
-        String result = this.restTemplate.getForEntity("http://localhost:8882/test" , String.class).getBody();
+        String result = this.restTemplate.getForEntity("http://PROJECT-STOCK/test" , String.class).getBody();
         System.out.println("调用远程方法(库存服务)响应的结果:" + result);
         return "";
     }

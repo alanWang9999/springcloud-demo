@@ -1,5 +1,5 @@
-rootProject.name = 'ly-springcloud-demo'
 include 'project-stock'
 include 'project-commons'
 include 'sale-service'
+include 'register-service'
 
