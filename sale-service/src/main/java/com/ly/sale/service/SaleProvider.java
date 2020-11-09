@@ -1,5 +1,6 @@
 package com.ly.sale.service;
 
+import com.Student;
 import com.ly.sale.service.entity.Sale;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -31,9 +32,7 @@ public class SaleProvider
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Sale sale = new Sale();
-        sale.setPrice(new BigDecimal("100"));
-        System.out.println(sale.toString());
+
         /** master分支 */
         /** register-center分支 */
         ApplicationContext ac = SpringApplication.run(SaleProvider.class);

@@ -15,10 +15,11 @@ import java.util.Date;
  * @Author alan.wang   QQ:3103484396
  * @Description 销售的实体类
  */
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Sale implements Serializable
+public class Sale
 {
     @TableId(type = IdType.AUTO)
     private Integer id;//销售单号
