@@ -7,4 +7,6 @@ dependencies {
     compile('com.baomidou:mybatis-plus-boot-starter:3.0.6')
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    //sleuth分布式链路跟踪
+    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
 }

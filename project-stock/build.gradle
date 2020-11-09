@@ -1,4 +1,6 @@
 dependencies{
     compile project(':project-commons')
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+    //sleuth分布式链路跟踪
+    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
 }

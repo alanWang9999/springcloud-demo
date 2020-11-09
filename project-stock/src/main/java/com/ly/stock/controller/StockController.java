@@ -1,6 +1,7 @@
 package com.ly.stock.controller;
 
 import com.ly.commons.bo.stock.AddStockBO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @Author alan.wang   QQ:3103484396
  * @Description
  */
+@Slf4j
 @RestController
 public class StockController
 {
     @RequestMapping("/test")
     public String test()
     {
+        log.info("测试库存服务");
         return "测试库存服务";
     }
     @RequestMapping("/addStock")

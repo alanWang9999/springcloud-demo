@@ -27,6 +27,7 @@ public class SaleDemoController {
     @ResponseBody
     @RequestMapping("/addSale")
     public String addSale(@RequestBody Sale sale){
+        String result = this.feignStockService.test();
         log.info("添加销售的入参:" + sale.toString());
         return "";
     }
