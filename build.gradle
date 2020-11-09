@@ -40,6 +40,7 @@ subprojects {
         compile("net.sourceforge.nekohtml:nekohtml:1.9.22")
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         compileOnly('org.projectlombok:lombok:1.18.4')
+        annotationProcessor "org.projectlombok:lombok:1.18.4"
     }
     dependencyManagement {
         imports {
