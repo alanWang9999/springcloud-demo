@@ -29,6 +29,7 @@ public class SaleProvider
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         /** master分支 */
+        /** register-center分支 */
         ApplicationContext ac = SpringApplication.run(SaleProvider.class);
     }
 }

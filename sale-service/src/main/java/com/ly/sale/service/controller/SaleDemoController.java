@@ -24,6 +24,7 @@ public class SaleDemoController {
 //        String result = this.restTemplate.getForEntity("http://PROJECT-STOCK/test" , String.class).getBody();
         String result = this.feignStockService.test();
         System.out.println("调用远程方法(库存服务)响应的结果:" + result);
+        /** 解决register-center的bug */
         return "";
     }
 }
