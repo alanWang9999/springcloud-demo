@@ -9,6 +9,11 @@ spring:
     url: jdbc:mysql://localhost:3306/springcloud_demos
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  zipkin:
+    base-url: http://localhost:9100
+    sleuth:
+      sampler:
+        percentage: 1.0    #0.1--1.0  链路跟踪的数据上传的概率是多大
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
 eureka:
