@@ -11,4 +11,6 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-sleuth"
     //分布式链路追踪上传数据到zipkin中
     compile "org.springframework.cloud:spring-cloud-sleuth-zipkin"
+    //hystrix:熔断器
+    compile "org.springframework.cloud:spring-cloud-starter-hystrix"
 }

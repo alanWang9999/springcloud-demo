@@ -2,6 +2,7 @@ package com.ly.sale.service.controller;
 
 import com.ly.sale.service.entity.Sale;
 import com.ly.sale.service.feign.FeignStockService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,17 @@ public class SaleDemoController {
     @Autowired
     private FeignStockService feignStockService;
 
+
+    @HystrixCommand(fallbackMethod = "addSaleFallback")
     @ResponseBody
     @RequestMapping("/addSale")
     public String addSale(@RequestBody Sale sale){
         String result = this.feignStockService.test();
         log.info("添加销售的入参:" + sale.toString());
-        return "";
+        return "执行成功!";
+    }
+    public String addSaleFallback(@RequestBody Sale sale){
+        return "请稍后重试!";
     }
 
     @ResponseBody
