@@ -3,4 +3,5 @@ include 'project-commons'
 include 'sale-service'
 include 'register-service'
 include 'zipkin-service'
+include 'zuul-service'
 
