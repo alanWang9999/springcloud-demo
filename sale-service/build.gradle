@@ -13,4 +13,7 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-sleuth-zipkin"
     //hystrix:熔断器
     compile "org.springframework.cloud:spring-cloud-starter-hystrix"
+    implementation 'cn.hutool:hutool-all:4.5.10'
+
+    implementation 'com.auth0:java-jwt:3.11.0'
 }
