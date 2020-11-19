@@ -11,6 +11,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.client.RestTemplate;
 import java.io.*;
 import java.math.BigDecimal;

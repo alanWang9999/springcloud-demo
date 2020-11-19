@@ -5,6 +5,7 @@ import com.ly.sale.service.feign.FeignStockService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 /**
  * @ClassName SaleDemoController
  * @Author alan.wang   QQ:3103484396
- * @Description TODO
+ * @Description
  */
 @Slf4j
 @Controller
@@ -24,6 +25,9 @@ public class SaleDemoController {
 
     @Autowired
     private FeignStockService feignStockService;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
 
     @HystrixCommand(fallbackMethod = "addSaleFallback")
@@ -41,6 +45,11 @@ public class SaleDemoController {
     @ResponseBody
     @RequestMapping("/testRemoteStock")
     public String testRemoteStock(){
+        //调用reids的get命令
+        String s = stringRedisTemplate.opsForValue().get("index");
+        //调用reids的set命令
+        stringRedisTemplate.opsForValue().set("index" , "aaaa");
+
 
         Sale sale = new Sale();
         sale.setPrice(new BigDecimal("100"));
