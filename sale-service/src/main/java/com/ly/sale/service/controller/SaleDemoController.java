@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * @ClassName SaleDemoController
@@ -85,6 +86,33 @@ public class SaleDemoController {
         } else {
             this.saleMapper.reduceQty(id , buyQty);
             return "购买成功!";
+        }
+    }
+
+    /**
+     *  购买商品
+     *  id:商品的编号  buyQty购买的数量
+     *  在高并发情况下的超卖问题、超发问题
+     *  乐观锁
+     *  @return
+     */
+    @RequestMapping("createSaleRecord2")
+    @ResponseBody
+    @Transactional
+    public String createSaleRecord2(int id , int buyQty){
+        /** 根据id查商品的数量 */
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("id",id);
+        Sale sale = this.saleMapper.selectOne(queryWrapper);
+        if(sale.getQuantity().intValue() < buyQty){
+            return "库存不够，请购买其他商品!";
+        } else {
+            int count = this.saleMapper.reduceQty2(id , buyQty , sale.getVersion() , UUID.randomUUID().toString());
+            if(count > 0){
+                return "购买成功!";
+            } else {
+                return "请重试!";
+            }
         }
     }
 }

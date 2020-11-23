@@ -10,5 +10,10 @@
         update sale set quantity=quantity - #{reduceQty}
             where id=#{id}
     </update>
+    <update id="reduceQty2" >
+        update sale set quantity=quantity - #{reduceQty},version=#{newVersion}
+            where id=#{id} and version=#{oldVersion}
+    </update>
+
 
 </mapper>

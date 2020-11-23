@@ -29,4 +29,5 @@ public class Sale
     private Date saledate;//销售日期
     private Integer userid;//销售员id
     private Integer productid;//销售的商品id
+    private String version;
 }

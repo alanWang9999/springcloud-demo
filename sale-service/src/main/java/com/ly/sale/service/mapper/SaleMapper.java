@@ -10,4 +10,5 @@ public interface SaleMapper extends BaseMapper<Sale>
     public Sale selectByIdForUpdate(@Param("id") int id);
 
     public int reduceQty(@Param("id") int id , @Param("reduceQty") int reduceQty);
+    public int reduceQty2(@Param("id") int id , @Param("reduceQty") int reduceQty , @Param("oldVersion")String oldVersion , @Param("newVersion")String newVersion);
 }
