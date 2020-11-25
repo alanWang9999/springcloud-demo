@@ -7,7 +7,10 @@ import com.ly.sale.service.mapper.SaleMapper;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -114,5 +120,18 @@ public class SaleDemoController {
                 return "请重试!";
             }
         }
+    }
+
+    public static final String REDIS_SECOND_KILL_GOODS_PREFIX = "secondkill:stock:";
+    @RequestMapping("/secondKill")
+    public String secondKill(int id , int buyCount){
+        DefaultRedisScript<String> redisScript = new DefaultRedisScript<String>();
+        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("lua" + File.separator + "secondKill.lua")));
+        redisScript.setResultType(String.class);
+        List<String> keys = new ArrayList<>();
+        keys.add(REDIS_SECOND_KILL_GOODS_PREFIX + id);
+        String result = this.stringRedisTemplate.execute(redisScript , keys , "" + buyCount);
+        System.out.println(result);
+        return result;
     }
 }
